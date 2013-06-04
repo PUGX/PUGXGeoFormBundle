@@ -34,7 +34,7 @@
     "suggest": {
     },
     "autoload": {
-        "psr-0": { "PUGX\\GeoForm": "" }
+        "psr-0": { "PUGX\\GeoFormBundle": "" }
     },
-    "target-dir": "PUGX/GeoForm"
+    "target-dir": "PUGX/GeoFormBundle"
 }
