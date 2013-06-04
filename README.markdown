@@ -8,12 +8,12 @@ This branch supports Symfony >= 2.1
 Documentation
 -------------
 
-To be created
+[Read the Documentation](https://github.com/PUGX/PUGXGeoFormBundle/blob/master/Resources/doc/index.md)
 
 Installation
 ------------
 
-To be created
+All the installation instructions are located in [documentation](https://github.com/PUGX/PUGXGeoFormBundle/blob/master/Resources/doc/index.md).
 
 License
 -------
