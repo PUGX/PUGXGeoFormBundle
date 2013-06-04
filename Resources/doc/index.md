@@ -3,7 +3,9 @@ PUGXGeoFormBundle Documentation
 
 ## Prerequisites
 
-This version of the bundle requires Symfony >= 2.1
+This version of the bundle requires Symfony >= 2.1.
+
+PUGXGeoFormBundle uses [ideato/geo-adapter](https://packagist.org/packages/ideato/geo-adapter) as a backend geocoding service.
 
 ## Installation
 
@@ -52,9 +54,10 @@ public function registerBundles()
 ### 3. Form
 
 In order to use geolocalization in a form, you should:
-add two hidden latitude and longitude fields;
-add the geo_code option in the form default options;
-specify which field has geocodable information with the geo_code_field option;
+
+1. add two hidden latitude and longitude fields;
+2. add the geo_code option in the form default options;
+3. specify which field has geocodable information with the geo_code_field option.
 
 Here's an example:
 
