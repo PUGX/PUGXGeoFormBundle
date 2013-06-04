@@ -33,7 +33,7 @@ class GeoTypeForm implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            FormEvents::PRE_BIND => 'onFormPreBind'
+            FormEvents::PRE_SUBMIT => 'onFormPreSubmit'
         );
     }
 
@@ -42,7 +42,7 @@ class GeoTypeForm implements EventSubscriberInterface
      *
      * @param \Symfony\Component\Form\FormEvent $event
      */
-    public function onFormPreBind(FormEvent $event)
+    public function onFormPreSubmit(FormEvent $event)
     {
         $data = $event->getData();
         $form = $event->getForm();
