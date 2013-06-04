@@ -1,0 +1,30 @@
+parameters:
+    pugx_geo_form.geo_data_adapter_class: PUGX\GeoFormBundle\Adapter\GeoDataAdapter
+    pugx_geo_form.geo_service_class: Geo\Service\GoogleMap\GeoCode
+    pugx_geo_form.geo_code_manager_class: PUGX\GeoFormBundle\Manager\GeoCodeManager
+    pugx_geo_form.geo_form_type_subscriber_class: PUGX\GeoFormBundle\EventListener\GeoTypeForm
+    pugx_geo_form.geo_code_type_extension_class: PUGX\GeoFormBundle\Form\Extension\GeoCodeExtension
+
+services:
+    pugx_geo_form.geo_data_adapter:
+        class:     %pugx_geo_form.geo_data_adapter_class%
+
+    pugx_geo_form.geo_service:
+        class:     %pugx_geo_form.geo_service_class%
+
+    pugx_geo_form.geo_code_manager:
+        class:     %pugx_geo_form.geo_code_manager_class%
+        calls:
+            - [addService, ["@pugx_geo_form.geo_service"]]
+
+    pugx_geo_form.geo_form_type_subscriber:
+        class:     %pugx_geo_form.geo_form_type_subscriber_class%
+        arguments: ["@pugx_geo_form.geo_code_manager", "@pugx_geo_form.geo_data_adapter"]
+        tags:
+                - { name: kernel.event_subscriber }
+
+    pugx_geo_form.geo_code_type_extension:
+        class: %pugx_geo_form.geo_code_type_extension_class%
+        arguments: ["@pugx_geo_form.geo_form_type_subscriber"]
+        tags:
+            - { name: form.type_extension, alias: form }

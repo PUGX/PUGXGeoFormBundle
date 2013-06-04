@@ -1,0 +1,40 @@
+{
+    "name": "pugx/geo-form-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony PUGXGeoForm",
+    "keywords": ["form geolocalization"],
+    "homepage": "https://github.com/PUGX",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Giorgio Cefaro",
+            "email": "giorgio.cefaro@gmail.com"
+        },
+        {
+            "name": "Leonardo Proietti",
+            "email": "leonardo.proietti@gmail.com"
+        },
+        {
+            "name": "Community",
+            "homepage": "https://github.com/PUGX/PUGXGeoForm/contributors"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/framework-bundle": "~2.1",
+        "symfony/form": "~2.1",
+        "symfony/security-bundle": "~2.1",
+        "ideato/geo-adapter": "dev-master@dev"
+    },
+    "require-dev": {
+        "symfony/yaml": "~2.1",
+        "symfony/validator": "~2.1"
+    },
+    "suggest": {
+    },
+    "autoload": {
+        "psr-0": { "PUGX\\GeoForm": "" }
+    },
+    "target-dir": "PUGX/GeoForm"
+}
