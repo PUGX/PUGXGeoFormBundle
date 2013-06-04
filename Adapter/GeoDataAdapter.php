@@ -7,9 +7,13 @@ use Symfony\Component\Form\FormInterface;
 class GeoDataAdapter implements GeoDataAdapterInterface
 {
     /**
-     * @param mixed $data
+     * 
+     * @param mixed         $data
+     * @param FormInterface $form
+     * 
      * @return mixed
-     * @throws \Exception
+     * 
+     * @throws \InvalidArgumentException
      */
     public function getFullAddress($data, FormInterface $form)
     {
