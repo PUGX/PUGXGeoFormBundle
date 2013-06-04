@@ -52,7 +52,7 @@ public function registerBundles()
 ### 3. Form
 
 In order to use geolocalization in a form, you should:
-have to add two hidden latitude and longitude fields;
+add two hidden latitude and longitude fields;
 add the geo_code option in the form default options;
 specify which field has geocodable information with the geo_code_field option;
 
