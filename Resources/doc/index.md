@@ -22,6 +22,7 @@ Add the following lines in your composer.json:
 ```
 {
     "require": {
+        "ideato/geo-adapter": "dev-master,
         "pugx/geo-form-bundle": "dev-master"
     }
 }
