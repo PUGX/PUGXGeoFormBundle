@@ -196,7 +196,7 @@ Once you have the classes in place, you can include the snippet in your twig (jQ
 ``` html
 
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true&language={{ app.request.locale }}"></script>
-<script type="text/javascript" src="{{ asset('/bundles/pugxgeolocalization/js/google_maps_autocomplete.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/bundles/pugxgeoform/js/google_maps_autocomplete.js') }}"></script>
 
 ```
 
