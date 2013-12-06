@@ -28,8 +28,8 @@
         "ideato/geo-adapter": "dev-master@dev"
     },
     "require-dev": {
-        "symfony/yaml": "~2.1",
-        "symfony/validator": "~2.1"
+        "symfony/yaml": "~2.3",
+        "symfony/validator": "~2.3"
     },
     "suggest": {
     },
