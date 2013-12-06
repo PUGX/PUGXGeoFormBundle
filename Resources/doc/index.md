@@ -3,7 +3,7 @@ PUGXGeoFormBundle Documentation
 
 ## Prerequisites
 
-This version of the bundle requires Symfony >= 2.1.
+This version of the bundle requires Symfony >= 2.3.
 
 PUGXGeoFormBundle uses [ideato/geo-adapter](https://packagist.org/packages/ideato/geo-adapter) as a backend geocoding service.
 
@@ -22,8 +22,8 @@ Add the following lines in your composer.json:
 ```
 {
     "require": {
-        "ideato/geo-adapter": "dev-master,
-        "pugx/geo-form-bundle": "dev-master"
+        "ideato/geo-adapter": "*@dev",
+        "pugx/geo-form-bundle": "*@dev"
     }
 }
 
