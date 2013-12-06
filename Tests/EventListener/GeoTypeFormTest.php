@@ -72,6 +72,6 @@ class GeoTypeFormTest extends \PHPUnit_Framework_TestCase
             ->with(array('address' => $address, 'latitude' => 123, 'longitude' => 456));
 
 
-        $this->listener->onFormPreBind($this->formEvent);
+        $this->listener->onFormPreSubmit($this->formEvent);
     }
 }
