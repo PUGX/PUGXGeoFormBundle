@@ -7,7 +7,7 @@ PUGXGeoFormBundle
 
 A Symfony 2 bundle to handle geolocalization inside Forms.
 
-This branch supports Symfony >= 2.1
+This branch supports Symfony >= 2.3
 
 Documentation
 -------------
