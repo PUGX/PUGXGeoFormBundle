@@ -22,7 +22,21 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('pugx_geo_form', 'array');
-
+        $rootNode
+            ->children()
+                ->scalarNode('region')
+                    ->validate()
+                    ->ifNull()
+                    ->thenInvalid('You should specify a region for geocoding services')
+                    ->end()
+                ->end()
+                ->scalarNode('useSsl')
+                    ->validate()
+                    ->ifNull()
+                    ->thenInvalid('You should specify if enable SSL for geocoding services')
+                    ->end()
+                ->end()
+            ->end();
         return $treeBuilder;
     }
 }

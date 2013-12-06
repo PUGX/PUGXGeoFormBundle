@@ -13,7 +13,8 @@ class PUGXGeoFormExtension extends Extension
     {
         $configuration = $this->getConfiguration($configs, $container);
         $config = $this->processConfiguration($configuration, $configs);
-
+        $container->setParameter('pugx_geo_form.region', $configs[0]['region']);
+        $container->setParameter('pugx_geo_form.useSsl', $configs[0]['useSsl']);
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
     }

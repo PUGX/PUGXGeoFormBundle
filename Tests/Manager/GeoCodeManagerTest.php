@@ -40,7 +40,7 @@ class GeoCodeManagerTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('geocode')
             ->with('0, test street')
-            ->will($this->returnValue(array($this->result)));
+            ->will($this->returnValue($this->result));
 
         $this->manager->registerProvider($this->provider);
         $this->manager->query('0, test street');

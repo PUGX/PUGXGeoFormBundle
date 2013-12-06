@@ -4,6 +4,7 @@ parameters:
     pugx_geo_form.geo_http_adapter_class: Geocoder\HttpAdapter\BuzzHttpAdapter
     pugx_geo_form.http_browser_class: Buzz\Browser
     pugx_geo_form.http_client_class: Buzz\Client\Curl
+    pugx_geo_form.geocoder_class: Geocoder\Geocoder
     pugx_geo_form.geo_code_manager_class: PUGX\GeoFormBundle\Manager\GeoCodeManager
     pugx_geo_form.geo_form_type_subscriber_class: PUGX\GeoFormBundle\EventListener\GeoTypeForm
     pugx_geo_form.geo_code_type_extension_class: PUGX\GeoFormBundle\Form\Extension\GeoCodeExtension
@@ -11,21 +12,29 @@ parameters:
 services:
     pugx_geo_form.http_client:
         class:  %pugx_geo_form.http_client_class%
+
     pugx_geo_form.http_browser:
         class:  %pugx_geo_form.http_browser_class%
         arguments: ["@pugx_geo_form.http_client"]
+
     pugx_geo_form.geo_http_adapter:
-        class:     %pugx_geo_form.geo_data_adapter_class%
+        class:     %pugx_geo_form.geo_http_adapter_class%
         arguments: ["@pugx_geo_form.http_browser"]
+
     pugx_geo_form.geo_provider:
         class:     %pugx_geo_form.geo_provider_class%
-        arguments: ["@pugx_geo_form.geo_data_adapter", "@locale", %pugx_geo_form.region%, %pugx_geo_form.useSsl%]
+        arguments: ["@pugx_geo_form.geo_http_adapter", %locale%, %pugx_geo_form.region%, %pugx_geo_form.useSsl%]
+
+    pugx_geo_form.geocoder:
+        class:  %pugx_geo_form.geocoder_class%
+
     pugx_geo_form.geo_code_manager:
         class:     %pugx_geo_form.geo_code_manager_class%
+        arguments: ["@pugx_geo_form.geocoder"]
         calls:
             - [registerProvider, ["@pugx_geo_form.geo_provider"]]
 
-pugx_geo_form.geo_data_adapter:
+    pugx_geo_form.geo_data_adapter:
         class:     %pugx_geo_form.geo_data_adapter_class%
 
     pugx_geo_form.geo_form_type_subscriber:
