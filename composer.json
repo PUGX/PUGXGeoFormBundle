@@ -25,7 +25,8 @@
         "symfony/framework-bundle": "~2.3",
         "symfony/form": "~2.3",
         "symfony/security-bundle": "~2.3",
-        "ideato/geo-adapter": "dev-master@dev"
+        "willdurand/geocoder": "@stable",
+        "kriswallsmith/buzz": "@stable"
     },
     "require-dev": {
         "symfony/yaml": "~2.3",

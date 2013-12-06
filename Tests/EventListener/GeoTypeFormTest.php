@@ -19,7 +19,7 @@ class GeoTypeFormTest extends \PHPUnit_Framework_TestCase
         $this->form        = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
         $this->dataAdapter = $this->getMockBuilder('PUGX\GeoFormBundle\Adapter\GeoDataAdapterInterface')->getMock();
         $this->manager     = $this->getMockBuilder('PUGX\GeoFormBundle\Manager\GeoCodeManager')->disableOriginalConstructor()->getMock();
-        $this->location    = $this->getMockBuilder('Geo\Location')->disableOriginalConstructor()->getMock();
+        $this->location    = $this->getMockBuilder('Geocoder\Result\ResultInterface')->disableOriginalConstructor()->getMock();
         $this->listener    = new GeoTypeForm($this->manager, $this->dataAdapter);
     }
 
