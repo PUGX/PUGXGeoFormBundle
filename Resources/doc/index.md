@@ -51,6 +51,16 @@ public function registerBundles()
 }
 ```
 
+### 3. config.yml
+
+Add a pugx_geo_form entry in your config.yml, specifying if ssl should be used and the region (note: this is just a bias, not a geographic constraint - see for example [google maps api docs](https://developers.google.com/maps/documentation/geocoding/?hl=it-IT&csw=1#RegionCodes))
+
+``` yml
+pugx_geo_form:
+    region: IT
+    useSsl: false
+```
+
 ### 3. Form
 
 In order to use geolocalization in a form, you should:
