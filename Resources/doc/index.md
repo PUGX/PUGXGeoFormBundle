@@ -89,7 +89,7 @@ class SearchFormType extends AbstractType
         $builder->add('latitude', 'hidden', array('required' => false));
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'geo_code' => true,
@@ -130,7 +130,7 @@ class SearchFormType extends AbstractType
         $builder->add('latitude', 'hidden', array('required' => false));
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'geo_code' => true,
@@ -182,7 +182,7 @@ class SearchFormType extends AbstractType
         ));
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'geo_code' => true,
