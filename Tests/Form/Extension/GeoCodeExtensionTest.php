@@ -29,7 +29,7 @@ class GeoCodeExtensionTest extends \PHPUnit_Framework_TestCase
                 'geo_code_field' => false,
             ));
 
-        $this->extension->setDefaultOptions($this->resolver);
+        $this->extension->configureOptions($this->resolver);
     }
 
     public function testBuildFormWithGeoCode()
