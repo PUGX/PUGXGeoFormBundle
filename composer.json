@@ -30,7 +30,8 @@
     },
     "require-dev": {
         "symfony/yaml": "~2.3",
-        "symfony/validator": "~2.3"
+        "symfony/validator": "~2.3",
+        "symfony/phpunit-bridge": "^2.7.4"
     },
     "suggest": {
     },
