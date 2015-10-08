@@ -8,6 +8,10 @@ class GeoCodeExtensionTest extends \PHPUnit_Framework_TestCase
 {
     protected $resolver;
     protected $listener;
+
+    /**
+     * @var GeoCodeExtension
+     */
     protected $extension;
     protected $formBuilder;
 
@@ -19,6 +23,9 @@ class GeoCodeExtensionTest extends \PHPUnit_Framework_TestCase
         $this->extension = new GeoCodeExtension($this->listener);
     }
 
+    /**
+     * @group legacy
+     */
     public function testSetDefaultOptions()
     {
         $this->resolver
@@ -30,6 +37,19 @@ class GeoCodeExtensionTest extends \PHPUnit_Framework_TestCase
             ));
 
         $this->extension->setDefaultOptions($this->resolver);
+    }
+
+    public function testConfigureOptions()
+    {
+        $this->resolver
+            ->expects($this->once())
+            ->method('setDefaults')
+            ->with(array(
+                'geo_code' => false,
+                'geo_code_field' => false,
+            ));
+
+        $this->extension->configureOptions($this->resolver);
     }
 
     public function testBuildFormWithGeoCode()
