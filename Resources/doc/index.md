@@ -3,7 +3,7 @@ PUGXGeoFormBundle Documentation
 
 ## Prerequisites
 
-This version of the bundle requires Symfony >= 2.3.
+This version of the bundle requires Symfony >= 2.3 (support for Symfony 3 is still in progress)
 
 PUGXGeoFormBundle uses [willdurand/geocoder](https://packagist.org/packages/willdurand/geocoder) as a backend geocoding service.
 
@@ -17,21 +17,10 @@ PUGXGeoFormBundle uses [willdurand/geocoder](https://packagist.org/packages/will
 
 **Using composer**
 
-Add the following lines in your composer.json:
-
-```
-{
-    "require": {
-        "pugx/geo-form-bundle": "*@dev"
-    }
-}
-
-```
-
-Now, run the composer to download the bundle:
+Run
 
 ``` bash
-$ php composer.phar update pugx/geo-form-bundle
+$ php composer.phar require pugx/geo-form-bundle
 ```
 
 ### 2. Enable the bundle
@@ -75,7 +64,7 @@ Here's an example:
 
 <?php
 
-namespace Acme\MyBundle\Form\Type;
+namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -114,7 +103,7 @@ you can specify the geo_code_field option for more than one field:
 
 <?php
 
-namespace Acme\MyBundle\Form\Type;
+namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -152,7 +141,7 @@ In order to use it, you have to add some classes to you form fields:
 
 <?php
 
-namespace Acme\MyBundle\Form\Type;
+namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

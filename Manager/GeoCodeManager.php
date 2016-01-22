@@ -10,13 +10,13 @@ class GeoCodeManager
     protected $geoCoder;
     protected $results;
 
-    public function __construct (Geocoder $geoCoder)
+    public function __construct(Geocoder $geoCoder)
     {
         $this->geoCoder = $geoCoder;
     }
 
     /**
-     * Get results
+     * Get results.
      *
      * @return array
      */
@@ -26,9 +26,9 @@ class GeoCodeManager
     }
 
     /**
-     * Query the chain of geo searching services
+     * Query the chain of geo searching services.
      *
-     * @param string $q
+     * @param string           $q
      * @param RuntimeException $e
      */
     public function query($q)
@@ -40,9 +40,10 @@ class GeoCodeManager
     }
 
     /**
-     * Get a specific result
+     * Get a specific result.
      *
-     * @param integer $index
+     * @param int $index
+     *
      * @return Geocoder\Result\ResultInterface
      */
     public function getResult($index)
@@ -55,13 +56,13 @@ class GeoCodeManager
     }
 
     /**
-     * Get the first result
+     * Get the first result.
      *
      * @return Geocoder\Result\ResultInterface
      */
     public function getFirst()
     {
-        return !isset($this->results[0])? : $this->results[0];
+        return !isset($this->results[0]) ?: $this->results[0];
     }
 
     public function registerProvider(ProviderInterface $provider)

@@ -48,4 +48,4 @@ class GeoCodeManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array($this->result), $results);
         $this->assertEquals($this->result, $this->manager->getFirst());
     }
-} 
+}

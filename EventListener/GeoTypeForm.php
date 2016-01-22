@@ -11,34 +11,31 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class GeoTypeForm implements EventSubscriberInterface
 {
     /**
-     *
      * @var \PUGX\GeoFormBundle\Manager\GeoCodeManager
      */
     private $geoCode;
 
     /**
-     *
      * @param \PUGX\GeoFormBundle\Manager\GeoCodeManager $geoCode
      */
     public function __construct(GeoCodeManager $geoCode, GeoDataAdapterInterface $dataAdapter)
     {
-        $this->geoCode     = $geoCode;
+        $this->geoCode = $geoCode;
         $this->dataAdapter = $dataAdapter;
     }
 
     /**
-     *
      * @return array
      */
     public static function getSubscribedEvents()
     {
         return array(
-            FormEvents::PRE_SUBMIT => 'onFormPreSubmit'
+            FormEvents::PRE_SUBMIT => 'onFormPreSubmit',
         );
     }
 
     /**
-     * set coordinates if null
+     * set coordinates if null.
      *
      * @param \Symfony\Component\Form\FormEvent $event
      */

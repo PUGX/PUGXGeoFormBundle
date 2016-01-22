@@ -35,7 +35,7 @@ class GeoDataAdapterTest extends \PHPUnit_Framework_TestCase
                 $this->returnValue(
                     array(
                         $field,
-                        $field
+                        $field,
                     )
                 )
             );

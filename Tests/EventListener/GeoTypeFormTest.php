@@ -15,12 +15,12 @@ class GeoTypeFormTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->formEvent   = $this->getMockBuilder('Symfony\Component\Form\FormEvent')->disableOriginalConstructor()->getMock();
-        $this->form        = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $this->formEvent = $this->getMockBuilder('Symfony\Component\Form\FormEvent')->disableOriginalConstructor()->getMock();
+        $this->form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
         $this->dataAdapter = $this->getMockBuilder('PUGX\GeoFormBundle\Adapter\GeoDataAdapterInterface')->getMock();
-        $this->manager     = $this->getMockBuilder('PUGX\GeoFormBundle\Manager\GeoCodeManager')->disableOriginalConstructor()->getMock();
-        $this->location    = $this->getMockBuilder('Geocoder\Result\ResultInterface')->disableOriginalConstructor()->getMock();
-        $this->listener    = new GeoTypeForm($this->manager, $this->dataAdapter);
+        $this->manager = $this->getMockBuilder('PUGX\GeoFormBundle\Manager\GeoCodeManager')->disableOriginalConstructor()->getMock();
+        $this->location = $this->getMockBuilder('Geocoder\Result\ResultInterface')->disableOriginalConstructor()->getMock();
+        $this->listener = new GeoTypeForm($this->manager, $this->dataAdapter);
     }
 
     public function testOnFormPreSubmit()
@@ -70,7 +70,6 @@ class GeoTypeFormTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('setData')
             ->with(array('address' => $address, 'latitude' => 123, 'longitude' => 456));
-
 
         $this->listener->onFormPreSubmit($this->formEvent);
     }
