@@ -5,7 +5,7 @@ PUGXGeoFormBundle
 [![Latest Stable Version](https://poser.pugx.org/pugx/geo-form-bundle/version.png)](https://packagist.org/packages/pugx/geo-form-bundle)
 [![Latest Unstable Version](https://poser.pugx.org/pugx/geo-form-bundle/v/unstable.png)](https://packagist.org/packages/pugx/geo-form-bundle)
 
-A Symfony 2 bundle to handle geolocalization inside Forms.
+A Symfony bundle to handle geolocalization inside Forms.
 
 This branch supports Symfony >= 2.3
 

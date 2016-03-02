@@ -47,4 +47,4 @@ services:
         class: %pugx_geo_form.geo_code_type_extension_class%
         arguments: ["@pugx_geo_form.geo_form_type_subscriber"]
         tags:
-            - { name: form.type_extension, alias: form }
+            - { name: form.type_extension, alias: form, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }

@@ -19,7 +19,12 @@ class GeoCodeExtension extends AbstractTypeExtension
 
     public function getExtendedType()
     {
-        return 'form';
+        // BC with Symfony <2.8
+        if (!method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
+            return 'form';
+        }
+
+        return 'Symfony\Component\Form\Extension\Core\Type\FormType';
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
