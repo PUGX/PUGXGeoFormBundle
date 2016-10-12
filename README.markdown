@@ -1,6 +1,7 @@
 PUGXGeoFormBundle
 =============
 
+[![Build Status](https://travis-ci.org/PUGX/PUGXGeoFormBundle.png?branch=master)](https://travis-ci.org/PUGX/PUGXGeoFormBundle)
 [![Downloads](https://poser.pugx.org/pugx/geo-form-bundle/d/total.png)](https://packagist.org/packages/pugx/geo-form-bundle)
 [![Latest Stable Version](https://poser.pugx.org/pugx/geo-form-bundle/version.png)](https://packagist.org/packages/pugx/geo-form-bundle)
 [![Latest Unstable Version](https://poser.pugx.org/pugx/geo-form-bundle/v/unstable.png)](https://packagist.org/packages/pugx/geo-form-bundle)
