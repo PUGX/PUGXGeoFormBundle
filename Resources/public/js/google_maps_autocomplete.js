@@ -8,8 +8,8 @@ $.each($("form"), function(formindex, form) {
         var autocomplete = new google.maps.places.Autocomplete(widget, options);
         google.maps.event.addListener(autocomplete, 'place_changed', function() {
             var place = autocomplete.getPlace();
-            $(widget).siblings('input.pugx-geocode-latitude').val(place.geometry.location.lat());
-            $(widget).siblings('input.pugx-geocode-longitude').val(place.geometry.location.lng());
+            $(widget).parents('form').find('input.pugx-geocode-latitude').val(place.geometry.location.lat());
+            $(widget).parents('form').find('input.pugx-geocode-longitude').val(place.geometry.location.lng());
         });
     });
 });
