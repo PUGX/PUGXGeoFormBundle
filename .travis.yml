@@ -22,8 +22,6 @@ matrix:
           env: SYMFONY_VERSION=2.8.* SYMFONY_DEPRECATIONS_HELPER=strict
         - php: 7.1
           env: SYMFONY_VERSION=3.3.* SYMFONY_DEPRECATIONS_HELPER=strict
-    allow_failures:
-        - php: nightly
 
 cache:
     directories:
