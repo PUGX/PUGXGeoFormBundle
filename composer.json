@@ -30,8 +30,8 @@
     "require-dev": {
         "symfony/yaml": "~2.3|~3.0",
         "symfony/validator": "~2.3|~3.0",
-        "symfony/phpunit-bridge": "^2.7.4",
-        "phpunit/phpunit": "4.*"
+        "symfony/phpunit-bridge": "^2.7.4|~3.0",
+        "phpunit/phpunit": "^4.8"
     },
     "autoload": {
         "psr-4": { "PUGX\\GeoFormBundle\\": "" }
