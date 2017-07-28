@@ -11,40 +11,40 @@ parameters:
 
 services:
     pugx_geo_form.http_client:
-        class:  %pugx_geo_form.http_client_class%
+        class: "%pugx_geo_form.http_client_class%"
 
     pugx_geo_form.http_browser:
-        class:  %pugx_geo_form.http_browser_class%
+        class: "%pugx_geo_form.http_browser_class%"
         arguments: ["@pugx_geo_form.http_client"]
 
     pugx_geo_form.geo_http_adapter:
-        class:     %pugx_geo_form.geo_http_adapter_class%
+        class: "%pugx_geo_form.geo_http_adapter_class%"
         arguments: ["@pugx_geo_form.http_browser"]
 
     pugx_geo_form.geo_provider:
-        class:     %pugx_geo_form.geo_provider_class%
-        arguments: ["@pugx_geo_form.geo_http_adapter", %locale%, %pugx_geo_form.region%, %pugx_geo_form.useSsl%]
+        class: "%pugx_geo_form.geo_provider_class%"
+        arguments: ["@pugx_geo_form.geo_http_adapter", "%locale%", "%pugx_geo_form.region%", "%pugx_geo_form.useSsl%"]
 
     pugx_geo_form.geocoder:
-        class:  %pugx_geo_form.geocoder_class%
+        class: "%pugx_geo_form.geocoder_class%"
 
     pugx_geo_form.geo_code_manager:
-        class:     %pugx_geo_form.geo_code_manager_class%
+        class: "%pugx_geo_form.geo_code_manager_class%"
         arguments: ["@pugx_geo_form.geocoder"]
         calls:
             - [registerProvider, ["@pugx_geo_form.geo_provider"]]
 
     pugx_geo_form.geo_data_adapter:
-        class:     %pugx_geo_form.geo_data_adapter_class%
+        class: "%pugx_geo_form.geo_data_adapter_class%"
 
     pugx_geo_form.geo_form_type_subscriber:
-        class:     %pugx_geo_form.geo_form_type_subscriber_class%
+        class: "%pugx_geo_form.geo_form_type_subscriber_class%"
         arguments: ["@pugx_geo_form.geo_code_manager", "@pugx_geo_form.geo_data_adapter"]
         tags:
-                - { name: kernel.event_subscriber }
+            - { name: kernel.event_subscriber }
 
     pugx_geo_form.geo_code_type_extension:
-        class: %pugx_geo_form.geo_code_type_extension_class%
+        class: "%pugx_geo_form.geo_code_type_extension_class%"
         arguments: ["@pugx_geo_form.geo_form_type_subscriber"]
         tags:
-            - { name: form.type_extension, alias: form, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }

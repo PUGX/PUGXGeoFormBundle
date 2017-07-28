@@ -1,5 +1,5 @@
 PUGXGeoFormBundle Documentation
-==================================
+===============================
 
 ## Prerequisites
 
@@ -20,7 +20,7 @@ PUGXGeoFormBundle uses [willdurand/geocoder](https://packagist.org/packages/will
 Run
 
 ``` bash
-$ php composer.phar require pugx/geo-form-bundle
+$ composer require pugx/geo-form-bundle
 ```
 
 ### 2. Enable the bundle
@@ -61,21 +61,21 @@ In order to use geolocalization in a form, you should:
 Here's an example:
 
 ``` php
-
 <?php
 
 namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class SearchFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('address', 'text', array('required' => true, 'geo_code_field' => true));
-        $builder->add('longitude', 'hidden', array('required' => false));
-        $builder->add('latitude', 'hidden', array('required' => false));
+        $builder->add('address', Type\TextType::class, array('required' => true, 'geo_code_field' => true));
+        $builder->add('longitude', Type\HiddenType::class, array('required' => false));
+        $builder->add('latitude', Type\HiddenType::class, array('required' => false));
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -84,13 +84,7 @@ class SearchFormType extends AbstractType
             'geo_code' => true,
         ));
     }
-
-    public function getName()
-    {
-        return 'search';
-    }
 }
-
 ```
 
 Before this form is bound latitude and longitude fields will be populated with a call to your preferred geolocalization
@@ -100,23 +94,23 @@ If you want to concatenate more than one field (I.e. composing the full address 
 you can specify the `geo_code_field` option for more than one field:
 
 ``` php
-
 <?php
 
 namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class SearchFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('address', 'text', array('required' => true, 'geo_code_field' => true));
-        $builder->add('city', 'text', array('required' => true, 'geo_code_field' => true));
-        $builder->add('country', 'text', array('required' => true, 'geo_code_field' => true));
-        $builder->add('longitude', 'hidden', array('required' => false));
-        $builder->add('latitude', 'hidden', array('required' => false));
+        $builder->add('address', TypeTextType::class, array('required' => true, 'geo_code_field' => true));
+        $builder->add('city', TypeTextType::class, array('required' => true, 'geo_code_field' => true));
+        $builder->add('country', TypeTextType::class, array('required' => true, 'geo_code_field' => true));
+        $builder->add('longitude', TypeHiddenType::class, array('required' => false));
+        $builder->add('latitude', TypeHiddenType::class, array('required' => false));
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -124,11 +118,6 @@ class SearchFormType extends AbstractType
         $resolver->setDefaults(array(
             'geo_code' => true,
         ));
-    }
-
-    public function getName()
-    {
-        return 'search';
     }
 }
 
@@ -138,35 +127,35 @@ In addition, a little javascript snippet is included in the bundle for integrati
 In order to use it, you have to add some classes to you form fields:
 
 ``` php
-
 <?php
 
 namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class SearchFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('address', 'text', array(
+        $builder->add('address', TypeTextType::class, array(
             'required' => true,
-            'attr'   =>  array(
-                'class'   => 'pugx-geocode'
+            'attr' => array(
+                'class' => 'pugx-geocode'
             )
         ));
-        $builder->add('longitude', 'hidden', array(
+        $builder->add('longitude', TypeHiddenType::class, array(
             'required' => false,
-            'attr'   =>  array(
-                'class'   => 'pugx-geocode-longitude'
+            'attr' => array(
+                'class' => 'pugx-geocode-longitude'
             )
         ));
 
-        $builder->add('latitude', 'hidden', array(
+        $builder->add('latitude', TypeHiddenType::class, array(
             'required' => false,
-            'attr'   =>  array(
-                'class'   => 'pugx-geocode-latitude'
+            'attr' => array(
+                'class' => 'pugx-geocode-latitude'
             )
         ));
     }
@@ -176,11 +165,6 @@ class SearchFormType extends AbstractType
         $resolver->setDefaults(array(
             'geo_code' => true,
         ));
-    }
-
-    public function getName()
-    {
-        return 'search';
     }
 }
 
@@ -191,10 +175,9 @@ As you can see, `pugx-geocode` is used for the meaningful geocoding field (the a
 
 Once you have the classes in place, you can include the snippet in your twig (jQuery is required):
 
-``` html
-
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true&language={{ app.request.locale }}"></script>
-<script type="text/javascript" src="{{ asset('/bundles/pugxgeoform/js/google_maps_autocomplete.js') }}"></script>
+``` html+jinja
+<script src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true&language={{ app.request.locale }}"></script>
+<script src="{{ asset('/bundles/pugxgeoform/js/google_maps_autocomplete.js') }}"></script>
 
 ```
 
