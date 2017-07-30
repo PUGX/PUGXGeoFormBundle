@@ -11,7 +11,7 @@ class GeoCodeManagerTest extends \PHPUnit_Framework_TestCase
     protected $manager;
     protected $result;
 
-    public function setUp()
+    protected function setUp()
     {
         $this->provider = $this->getMockbuilder('Geocoder\Provider\ProviderInterface')->getMock();
         $this->geoCoder = $this->getMockbuilder('Geocoder\Geocoder')->disableOriginalConstructor()->getMock();

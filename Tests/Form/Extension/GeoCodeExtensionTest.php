@@ -15,7 +15,7 @@ class GeoCodeExtensionTest extends \PHPUnit_Framework_TestCase
     protected $extension;
     protected $formBuilder;
 
-    public function setUp()
+    protected function setUp()
     {
         $this->resolver = $this->getMockbuilder('Symfony\Component\OptionsResolver\OptionsResolver')->disableOriginalConstructor()->getMock();
         $this->listener = $this->getMockbuilder('Symfony\Component\EventDispatcher\EventSubscriberInterface')->getMock();

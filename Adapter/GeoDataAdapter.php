@@ -9,9 +9,9 @@ class GeoDataAdapter implements GeoDataAdapterInterface
     /**
      * @param mixed         $data
      * @param FormInterface $form
-     * 
+     *
      * @return mixed
-     * 
+     *
      * @throws \InvalidArgumentException
      */
     public function getFullAddress($data, FormInterface $form)

@@ -3,10 +3,10 @@
 namespace PUGX\GeoFormBundle\EventListener;
 
 use PUGX\GeoFormBundle\Adapter\GeoDataAdapterInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use PUGX\GeoFormBundle\Manager\GeoCodeManager;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 class GeoTypeForm implements EventSubscriberInterface
 {
@@ -14,6 +14,11 @@ class GeoTypeForm implements EventSubscriberInterface
      * @var \PUGX\GeoFormBundle\Manager\GeoCodeManager
      */
     private $geoCode;
+
+    /**
+     * @var GeoDataAdapterInterface
+     */
+    private $dataAdapter;
 
     /**
      * @param \PUGX\GeoFormBundle\Manager\GeoCodeManager $geoCode

@@ -7,7 +7,7 @@ use PUGX\GeoFormBundle\Adapter\GeoDataAdapter;
 class GeoDataAdapterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function testGetFullAddressThrowException()
     {

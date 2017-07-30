@@ -13,7 +13,7 @@ class GeoTypeFormTest extends \PHPUnit_Framework_TestCase
     protected $listener;
     protected $location;
 
-    public function setUp()
+    protected function setUp()
     {
         $this->formEvent = $this->getMockBuilder('Symfony\Component\Form\FormEvent')->disableOriginalConstructor()->getMock();
         $this->form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();

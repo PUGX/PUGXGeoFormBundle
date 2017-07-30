@@ -28,15 +28,16 @@ class GeoCodeManager
     /**
      * Query the chain of geo searching services.
      *
-     * @param string           $q
-     * @param RuntimeException $e
+     * @param string $query
+     *
+     * @throws \RuntimeException
      */
-    public function query($q)
+    public function query($query)
     {
         if (0 === count($this->geoCoder->getProviders())) {
             throw new \RuntimeException('Service is not set');
         }
-        $this->results = array($this->geoCoder->geocode($q));
+        $this->results = array($this->geoCoder->geocode($query));
     }
 
     /**
@@ -44,25 +45,23 @@ class GeoCodeManager
      *
      * @param int $index
      *
-     * @return Geocoder\Result\ResultInterface
+     * @return \Geocoder\Result\ResultInterface
      */
     public function getResult($index)
     {
-        if (!isset($this->results[$index])) {
-            return;
+        if (isset($this->results[$index])) {
+            return $this->results[$index];
         }
-
-        return $this->results[$index];
     }
 
     /**
      * Get the first result.
      *
-     * @return Geocoder\Result\ResultInterface
+     * @return \Geocoder\Result\ResultInterface
      */
     public function getFirst()
     {
-        return !isset($this->results[0]) ?: $this->results[0];
+        return $this->getResult(0);
     }
 
     public function registerProvider(ProviderInterface $provider)
