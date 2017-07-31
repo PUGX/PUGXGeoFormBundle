@@ -39,7 +39,7 @@ services:
 
     pugx_geo_form.geo_form_type_subscriber:
         class: "%pugx_geo_form.geo_form_type_subscriber_class%"
-        arguments: ["@pugx_geo_form.geo_code_manager", "@pugx_geo_form.geo_data_adapter"]
+        arguments: ["@pugx_geo_form.geo_code_manager", "@pugx_geo_form.geo_data_adapter", "%pugx_geo_form.names%"]
         tags:
             - { name: kernel.event_subscriber }
 

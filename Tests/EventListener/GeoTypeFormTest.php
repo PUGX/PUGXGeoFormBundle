@@ -20,7 +20,7 @@ class GeoTypeFormTest extends \PHPUnit_Framework_TestCase
         $this->dataAdapter = $this->getMockBuilder('PUGX\GeoFormBundle\Adapter\GeoDataAdapterInterface')->getMock();
         $this->manager = $this->getMockBuilder('PUGX\GeoFormBundle\Manager\GeoCodeManager')->disableOriginalConstructor()->getMock();
         $this->location = $this->getMockBuilder('Geocoder\Result\ResultInterface')->disableOriginalConstructor()->getMock();
-        $this->listener = new GeoTypeForm($this->manager, $this->dataAdapter);
+        $this->listener = new GeoTypeForm($this->manager, $this->dataAdapter, array('lat' => 'latitude', 'lng' => 'longitude'));
     }
 
     public function testOnFormPreSubmit()

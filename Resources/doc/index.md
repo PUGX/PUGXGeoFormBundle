@@ -43,18 +43,23 @@ public function registerBundles()
 ### 3. config.yml
 
 Add a `pugx_geo_form` entry in your config.yml, specifying if ssl should be used and the region (note: this is just a bias, not a geographic constraint - see for example [google maps api docs](https://developers.google.com/maps/documentation/geocoding/?hl=it-IT&csw=1#RegionCodes))
+You can also customize the names for "latitude" and "longitude", or omit that options and get default ones.
 
 ``` yml
 pugx_geo_form:
     region: IT
     useSsl: false
+    # the following options are not mandatory (here are shown with their default value)
+    names:
+        lat: latitude
+        lng: longiutde
 ```
 
 ### 3. Form
 
 In order to use geolocalization in a form, you should:
 
-1. add two hidden latitude and longitude fields;
+1. add two hidden "latitude" and "longitude" fields (feel free to use different names, see previous point);
 2. add the `geo_code` option in the form default options;
 3. specify which field has geocodable information with the `geo_code_field` option.
 
@@ -87,10 +92,10 @@ class SearchFormType extends AbstractType
 }
 ```
 
-Before this form is bound latitude and longitude fields will be populated with a call to your preferred geolocalization
+Before this form is bound, latitude and longitude fields will be populated with a call to your preferred geolocalization
 API (Google Maps by default).
 
-If you want to concatenate more than one field (I.e. composing the full address of a venue through address, city, country),
+If you want to concatenate more than one field (i.e. composing the full address of a venue through address, city, country),
 you can specify the `geo_code_field` option for more than one field:
 
 ``` php
@@ -176,7 +181,7 @@ As you can see, `pugx-geocode` is used for the meaningful geocoding field (the a
 Once you have the classes in place, you can include the snippet in your twig (jQuery is required):
 
 ``` html+jinja
-<script src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true&language={{ app.request.locale }}"></script>
+<script src="//maps.googleapis.com/maps/api/js?libraries=places&amp;language={{ app.request.locale }}"></script>
 <script src="{{ asset('/bundles/pugxgeoform/js/google_maps_autocomplete.js') }}"></script>
 
 ```

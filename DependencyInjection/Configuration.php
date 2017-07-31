@@ -4,19 +4,16 @@ namespace PUGX\GeoFormBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-use Symfony\Component\Config\Definition\NodeInterface;
 
 /**
- * FrameworkExtraBundle configuration structure.
- *
- * @author Henrik Bjornskov <hb@peytz.dk>
+ * PUGXGeoFormBundle configuration structure.
  */
 class Configuration implements ConfigurationInterface
 {
     /**
      * Generates the configuration tree.
      *
-     * @return NodeInterface
+     * @return TreeBuilder
      */
     public function getConfigTreeBuilder()
     {
@@ -34,6 +31,18 @@ class Configuration implements ConfigurationInterface
                     ->validate()
                     ->ifNull()
                     ->thenInvalid('You should specify if enable SSL for geocoding services')
+                    ->end()
+                ->end()
+                ->arrayNode('names')
+                    ->children()
+                        ->scalarNode('lat')
+                            ->cannotBeEmpty()
+                            ->defaultValue('latitude')
+                        ->end()
+                        ->scalarNode('lng')
+                            ->cannotBeEmpty()
+                            ->defaultValue('longitude')
+                        ->end()
                     ->end()
                 ->end()
             ->end();

@@ -11,7 +11,7 @@ use Symfony\Component\Form\FormEvents;
 class GeoTypeForm implements EventSubscriberInterface
 {
     /**
-     * @var \PUGX\GeoFormBundle\Manager\GeoCodeManager
+     * @var GeoCodeManager
      */
     private $geoCode;
 
@@ -21,12 +21,23 @@ class GeoTypeForm implements EventSubscriberInterface
     private $dataAdapter;
 
     /**
-     * @param \PUGX\GeoFormBundle\Manager\GeoCodeManager $geoCode
+     * @var array
      */
-    public function __construct(GeoCodeManager $geoCode, GeoDataAdapterInterface $dataAdapter)
+    private $names;
+
+    /**
+     * @param GeoCodeManager          $geoCode
+     * @param GeoDataAdapterInterface $dataAdapter
+     * @param array                   $names
+     */
+    public function __construct(GeoCodeManager $geoCode, GeoDataAdapterInterface $dataAdapter, array $names)
     {
         $this->geoCode = $geoCode;
         $this->dataAdapter = $dataAdapter;
+        $this->names = $names;
+        if (!isset($names['lat']) || !isset($names['lng'])) {
+            throw new \InvalidArgumentException('Names array must be formed with lat/lng keys.');
+        }
     }
 
     /**
@@ -53,8 +64,8 @@ class GeoTypeForm implements EventSubscriberInterface
 
             $this->geoCode->query($address);
             $location = $this->geoCode->getFirst();
-            $data['latitude'] = $location->getLatitude();
-            $data['longitude'] = $location->getLongitude();
+            $data[$this->names['lat']] = $location->getLatitude();
+            $data[$this->names['lng']] = $location->getLongitude();
 
             $event->setData($data);
         } catch (\Exception $e) {
