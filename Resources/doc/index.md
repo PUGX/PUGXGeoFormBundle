@@ -52,7 +52,7 @@ pugx_geo_form:
     # the following options are not mandatory (here are shown with their default value)
     names:
         lat: latitude
-        lng: longiutde
+        lng: longitude
 ```
 
 ### 3. Form
@@ -181,10 +181,14 @@ As you can see, `pugx-geocode` is used for the meaningful geocoding field (the a
 Once you have the classes in place, you can include the snippet in your twig (jQuery is required):
 
 ``` html+jinja
-<script src="//maps.googleapis.com/maps/api/js?libraries=places&amp;language={{ app.request.locale }}"></script>
+<script src="//maps.googleapis.com/maps/api/js?key=YOURKEY&amp;libraries=places&amp;language={{ app.request.locale }}"></script>
 <script src="{{ asset('/bundles/pugxgeoform/js/google_maps_autocomplete.js') }}"></script>
 
 ```
 
 This time the latitude and longitude fields will be populated via javascript and the server will not make an additional
 call the the geolocalization API.
+
+> ⚠  You'll need to [get an API key](https://developers.google.com/maps/documentation/javascript/get-api-key)
+> from Google and put it in the above template, replacing `YOURKEY` string.
+
