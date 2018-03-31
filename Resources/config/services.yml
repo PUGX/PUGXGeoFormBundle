@@ -40,11 +40,13 @@ services:
     pugx_geo_form.geo_form_type_subscriber:
         class: "%pugx_geo_form.geo_form_type_subscriber_class%"
         arguments: ["@pugx_geo_form.geo_code_manager", "@pugx_geo_form.geo_data_adapter", "%pugx_geo_form.names%"]
+        public: true
         tags:
             - { name: kernel.event_subscriber }
 
     pugx_geo_form.geo_code_type_extension:
         class: "%pugx_geo_form.geo_code_type_extension_class%"
         arguments: ["@pugx_geo_form.geo_form_type_subscriber"]
+        public: true
         tags:
             - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
