@@ -4,7 +4,7 @@ namespace PUGX\GeoFormBundle\Tests\Adapter;
 
 use PUGX\GeoFormBundle\Adapter\GeoDataAdapter;
 
-class GeoDataAdapterTest extends \PHPUnit_Framework_TestCase
+class GeoDataAdapterTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @expectedException \InvalidArgumentException

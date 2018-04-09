@@ -4,7 +4,7 @@ namespace PUGX\GeoFormBundle\Tests\EventListener;
 
 use PUGX\GeoFormBundle\EventListener\GeoTypeForm;
 
-class GeoTypeFormTest extends \PHPUnit_Framework_TestCase
+class GeoTypeFormTest extends \PHPUnit\Framework\TestCase
 {
     protected $formEvent;
     protected $form;

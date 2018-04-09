@@ -4,7 +4,7 @@ namespace PUGX\GeoFormBundle\Tests\Manager;
 
 use PUGX\GeoFormBundle\Manager\GeoCodeManager;
 
-class GeoCodeManagerTest extends \PHPUnit_Framework_TestCase
+class GeoCodeManagerTest extends \PHPUnit\Framework\TestCase
 {
     protected $provider;
     protected $geoCoder;

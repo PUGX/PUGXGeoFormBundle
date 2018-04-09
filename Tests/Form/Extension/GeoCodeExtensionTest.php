@@ -4,7 +4,7 @@ namespace PUGX\GeoFormBundle\Tests\Form\Extension;
 
 use PUGX\GeoFormBundle\Form\Extension\GeoCodeExtension;
 
-class GeoCodeExtensionTest extends \PHPUnit_Framework_TestCase
+class GeoCodeExtensionTest extends \PHPUnit\Framework\TestCase
 {
     protected $resolver;
     protected $listener;
