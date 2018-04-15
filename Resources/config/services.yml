@@ -12,30 +12,37 @@ parameters:
 services:
     pugx_geo_form.http_client:
         class: "%pugx_geo_form.http_client_class%"
+        public: false
 
     pugx_geo_form.http_browser:
         class: "%pugx_geo_form.http_browser_class%"
         arguments: ["@pugx_geo_form.http_client"]
+        public: false
 
     pugx_geo_form.geo_http_adapter:
         class: "%pugx_geo_form.geo_http_adapter_class%"
         arguments: ["@pugx_geo_form.http_browser"]
+        public: false
 
     pugx_geo_form.geo_provider:
         class: "%pugx_geo_form.geo_provider_class%"
         arguments: ["@pugx_geo_form.geo_http_adapter", "%locale%", "%pugx_geo_form.region%", "%pugx_geo_form.useSsl%"]
+        public: false
 
     pugx_geo_form.geocoder:
         class: "%pugx_geo_form.geocoder_class%"
+        public: false
 
     pugx_geo_form.geo_code_manager:
         class: "%pugx_geo_form.geo_code_manager_class%"
         arguments: ["@pugx_geo_form.geocoder"]
+        public: true
         calls:
             - [registerProvider, ["@pugx_geo_form.geo_provider"]]
 
     pugx_geo_form.geo_data_adapter:
         class: "%pugx_geo_form.geo_data_adapter_class%"
+        public: false
 
     pugx_geo_form.geo_form_type_subscriber:
         class: "%pugx_geo_form.geo_form_type_subscriber_class%"

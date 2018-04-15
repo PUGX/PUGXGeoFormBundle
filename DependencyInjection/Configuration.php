@@ -18,7 +18,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('pugx_geo_form', 'array');
+        $rootNode = $treeBuilder->root('pugx_geo_form');
         $rootNode
             ->children()
                 ->scalarNode('region')
@@ -27,13 +27,16 @@ class Configuration implements ConfigurationInterface
                     ->thenInvalid('You should specify a region for geocoding services')
                     ->end()
                 ->end()
-                ->scalarNode('useSsl')
-                    ->validate()
-                    ->ifNull()
-                    ->thenInvalid('You should specify if enable SSL for geocoding services')
-                    ->end()
+                ->booleanNode('useSsl')
+                    ->defaultValue(false)
+                    ->treatNullLike(false)
                 ->end()
                 ->arrayNode('names')
+                    ->addDefaultsIfNotSet()
+                    ->treatNullLike([
+                        'lat' => 'latitude',
+                        'lng' => 'longitude',
+                    ])
                     ->children()
                         ->scalarNode('lat')
                             ->cannotBeEmpty()
