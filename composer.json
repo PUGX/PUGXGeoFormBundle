@@ -25,7 +25,7 @@
         "symfony/form": "^2.7|^3.4|^4.0",
         "symfony/security-bundle": "^2.7|^3.4|^4.0",
         "willdurand/geocoder": "^2.8",
-        "kriswallsmith/buzz": "^0.15"
+        "kriswallsmith/buzz": "^0.15|^0.16|^0.17"
     },
     "require-dev": {
         "symfony/yaml": "^2.7|^3.4|^4.0",
