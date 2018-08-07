@@ -31,10 +31,10 @@ class GeoCodeExtensionTest extends \PHPUnit\Framework\TestCase
         $this->resolver
             ->expects($this->once())
             ->method('setDefaults')
-            ->with(array(
+            ->with([
                 'geo_code' => false,
                 'geo_code_field' => false,
-            ));
+            ]);
 
         $this->extension->configureOptions($this->resolver);
     }
@@ -44,10 +44,10 @@ class GeoCodeExtensionTest extends \PHPUnit\Framework\TestCase
         $this->resolver
             ->expects($this->once())
             ->method('setDefaults')
-            ->with(array(
+            ->with([
                 'geo_code' => false,
                 'geo_code_field' => false,
-            ));
+            ]);
 
         $this->extension->configureOptions($this->resolver);
     }
@@ -59,7 +59,7 @@ class GeoCodeExtensionTest extends \PHPUnit\Framework\TestCase
             ->method('addEventSubscriber')
             ->with($this->listener);
 
-        $this->extension->buildForm($this->formBuilder, array('geo_code' => true));
+        $this->extension->buildForm($this->formBuilder, ['geo_code' => true]);
     }
 
     public function testBuildFormWithoutGeoCode()
@@ -68,6 +68,6 @@ class GeoCodeExtensionTest extends \PHPUnit\Framework\TestCase
             ->expects($this->never())
             ->method('addEventSubscriber');
 
-        $this->extension->buildForm($this->formBuilder, array());
+        $this->extension->buildForm($this->formBuilder, []);
     }
 }

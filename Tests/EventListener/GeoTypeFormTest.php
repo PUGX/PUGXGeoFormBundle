@@ -20,15 +20,15 @@ class GeoTypeFormTest extends \PHPUnit\Framework\TestCase
         $this->dataAdapter = $this->getMockBuilder('PUGX\GeoFormBundle\Adapter\GeoDataAdapterInterface')->getMock();
         $this->manager = $this->getMockBuilder('PUGX\GeoFormBundle\Manager\GeoCodeManager')->disableOriginalConstructor()->getMock();
         $this->location = $this->getMockBuilder('Geocoder\Result\ResultInterface')->disableOriginalConstructor()->getMock();
-        $this->listener = new GeoTypeForm($this->manager, $this->dataAdapter, array('lat' => 'latitude', 'lng' => 'longitude'));
+        $this->listener = new GeoTypeForm($this->manager, $this->dataAdapter, ['lat' => 'latitude', 'lng' => 'longitude']);
     }
 
     public function testOnFormPreSubmit()
     {
         $address = 'Via XYZ 22';
-        $data = array(
+        $data = [
             'address' => $address,
-        );
+        ];
 
         $this->formEvent
             ->expects($this->once())
@@ -69,7 +69,7 @@ class GeoTypeFormTest extends \PHPUnit\Framework\TestCase
         $this->formEvent
             ->expects($this->once())
             ->method('setData')
-            ->with(array('address' => $address, 'latitude' => 123, 'longitude' => 456));
+            ->with(['address' => $address, 'latitude' => 123, 'longitude' => 456]);
 
         $this->listener->onFormPreSubmit($this->formEvent);
     }

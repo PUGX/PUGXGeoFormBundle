@@ -16,7 +16,7 @@ class GeoDataAdapter implements GeoDataAdapterInterface
      */
     public function getFullAddress($data, FormInterface $form)
     {
-        $fields = array();
+        $fields = [];
         foreach ($form->all() as $field) {
             $options = $field->getConfig()->getOptions();
             if (isset($options['geo_code_field']) && true == $options['geo_code_field']) {

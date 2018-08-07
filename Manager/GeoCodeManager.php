@@ -37,7 +37,7 @@ class GeoCodeManager
         if (0 === count($this->geoCoder->getProviders())) {
             throw new \RuntimeException('Service is not set');
         }
-        $this->results = array($this->geoCoder->geocode($query));
+        $this->results = [$this->geoCoder->geocode($query)];
     }
 
     /**

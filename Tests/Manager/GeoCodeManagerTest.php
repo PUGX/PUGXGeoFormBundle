@@ -34,7 +34,7 @@ class GeoCodeManagerTest extends \PHPUnit\Framework\TestCase
         $this->geoCoder
             ->expects($this->once())
             ->method('getProviders')
-            ->will($this->returnValue(array($this->provider)));
+            ->will($this->returnValue([$this->provider]));
 
         $this->geoCoder
             ->expects($this->once())
@@ -45,7 +45,7 @@ class GeoCodeManagerTest extends \PHPUnit\Framework\TestCase
         $this->manager->registerProvider($this->provider);
         $this->manager->query('0, test street');
         $results = $this->manager->getResults();
-        $this->assertEquals(array($this->result), $results);
+        $this->assertEquals([$this->result], $results);
         $this->assertEquals($this->result, $this->manager->getFirst());
     }
 }

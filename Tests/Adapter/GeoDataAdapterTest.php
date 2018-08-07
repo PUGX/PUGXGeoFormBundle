@@ -15,10 +15,10 @@ class GeoDataAdapterTest extends \PHPUnit\Framework\TestCase
         $form
             ->expects($this->once())
             ->method('all')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
 
         $adapter = new GeoDataAdapter();
-        $adapter->getFullAddress(array(), $form);
+        $adapter->getFullAddress([], $form);
     }
 
     public function testGetFullAddressReturnValues()
@@ -33,10 +33,10 @@ class GeoDataAdapterTest extends \PHPUnit\Framework\TestCase
             ->method('all')
             ->will(
                 $this->returnValue(
-                    array(
+                    [
                         $field,
                         $field,
-                    )
+                    ]
                 )
             );
 
@@ -72,13 +72,13 @@ class GeoDataAdapterTest extends \PHPUnit\Framework\TestCase
             ->method('getOptions')
             ->will(
                 $this->onConsecutiveCalls(
-                    array(),
-                    array('geo_code_field' => true)
+                    [],
+                    ['geo_code_field' => true]
                 )
             );
 
         $adapter = new GeoDataAdapter();
-        $address = $adapter->getFullAddress(array('address' => 'Via XYZ'), $form);
+        $address = $adapter->getFullAddress(['address' => 'Via XYZ'], $form);
         $this->assertEquals('Via XYZ', $address);
     }
 }

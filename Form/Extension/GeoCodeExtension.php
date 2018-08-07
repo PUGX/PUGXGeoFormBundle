@@ -51,9 +51,9 @@ class GeoCodeExtension extends AbstractTypeExtension
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'geo_code' => false,
             'geo_code_field' => false,
-        ));
+        ]);
     }
 }
