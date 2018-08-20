@@ -10,21 +10,21 @@ class GeoDataAdapter implements GeoDataAdapterInterface
      * @param mixed         $data
      * @param FormInterface $form
      *
-     * @return mixed
+     * @return string
      *
      * @throws \InvalidArgumentException
      */
-    public function getFullAddress($data, FormInterface $form)
+    public function getFullAddress($data, FormInterface $form): string
     {
         $fields = [];
         foreach ($form->all() as $field) {
             $options = $field->getConfig()->getOptions();
-            if (isset($options['geo_code_field']) && true == $options['geo_code_field']) {
+            if (isset($options['geo_code_field']) && true === $options['geo_code_field']) {
                 $fields[] = $data[$field->getName()];
             }
         }
 
-        if (count($fields)) {
+        if (\count($fields) > 0) {
             return implode(' ', $fields);
         }
 

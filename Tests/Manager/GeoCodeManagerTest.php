@@ -2,20 +2,26 @@
 
 namespace PUGX\GeoFormBundle\Tests\Manager;
 
+use Geocoder\Collection;
+use Geocoder\Location;
+use Geocoder\Provider\Provider;
+use Geocoder\ProviderAggregator;
 use PUGX\GeoFormBundle\Manager\GeoCodeManager;
 
 class GeoCodeManagerTest extends \PHPUnit\Framework\TestCase
 {
-    protected $provider;
-    protected $geoCoder;
-    protected $manager;
-    protected $result;
+    private $provider;
+    private $geoCoder;
+    private $manager;
+    private $collection;
+    private $result;
 
     protected function setUp()
     {
-        $this->provider = $this->getMockbuilder('Geocoder\Provider\ProviderInterface')->getMock();
-        $this->geoCoder = $this->getMockbuilder('Geocoder\Geocoder')->disableOriginalConstructor()->getMock();
-        $this->result = $this->getMockbuilder('Geocoder\Result\ResultInterface')->disableOriginalConstructor()->getMock();
+        $this->provider = $this->createMock(Provider::class);
+        $this->geoCoder = $this->createMock(ProviderAggregator::class);
+        $this->collection = $this->createMock(Collection::class);
+        $this->result = $this->createMock(Location::class);
         $this->manager = new GeoCodeManager($this->geoCoder);
     }
 
@@ -40,12 +46,11 @@ class GeoCodeManagerTest extends \PHPUnit\Framework\TestCase
             ->expects($this->once())
             ->method('geocode')
             ->with('0, test street')
-            ->will($this->returnValue($this->result));
+            ->will($this->returnValue($this->collection));
 
         $this->manager->registerProvider($this->provider);
         $this->manager->query('0, test street');
         $results = $this->manager->getResults();
-        $this->assertEquals([$this->result], $results);
-        $this->assertEquals($this->result, $this->manager->getFirst());
+        $this->assertEquals($this->collection, $results);
     }
 }

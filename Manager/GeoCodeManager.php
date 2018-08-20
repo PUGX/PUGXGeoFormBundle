@@ -2,15 +2,24 @@
 
 namespace PUGX\GeoFormBundle\Manager;
 
-use Geocoder\Geocoder;
-use Geocoder\Provider\ProviderInterface;
+use Geocoder\Collection;
+use Geocoder\Location;
+use Geocoder\Provider\Provider;
+use Geocoder\ProviderAggregator;
 
 class GeoCodeManager
 {
+    /**
+     * @var ProviderAggregator
+     */
     protected $geoCoder;
+
+    /**
+     * @var Collection
+     */
     protected $results;
 
-    public function __construct(Geocoder $geoCoder)
+    public function __construct(ProviderAggregator $geoCoder)
     {
         $this->geoCoder = $geoCoder;
     }
@@ -18,9 +27,9 @@ class GeoCodeManager
     /**
      * Get results.
      *
-     * @return array
+     * @return Collection|Location
      */
-    public function getResults()
+    public function getResults(): Collection
     {
         return $this->results;
     }
@@ -30,14 +39,14 @@ class GeoCodeManager
      *
      * @param string $query
      *
-     * @throws \RuntimeException
+     * @throws \Geocoder\Exception\Exception
      */
-    public function query($query)
+    public function query(string $query)
     {
-        if (0 === count($this->geoCoder->getProviders())) {
+        if (0 === \count($this->geoCoder->getProviders())) {
             throw new \RuntimeException('Service is not set');
         }
-        $this->results = [$this->geoCoder->geocode($query)];
+        $this->results = $this->geoCoder->geocode($query);
     }
 
     /**
@@ -45,26 +54,28 @@ class GeoCodeManager
      *
      * @param int $index
      *
-     * @return \Geocoder\Result\ResultInterface
+     * @return Location|null
      */
-    public function getResult($index)
+    public function getResult(int $index)
     {
         if (isset($this->results[$index])) {
             return $this->results[$index];
         }
+
+        return null;
     }
 
     /**
      * Get the first result.
      *
-     * @return \Geocoder\Result\ResultInterface
+     * @return Location|null
      */
     public function getFirst()
     {
         return $this->getResult(0);
     }
 
-    public function registerProvider(ProviderInterface $provider)
+    public function registerProvider(Provider $provider)
     {
         $this->geoCoder->registerProvider($provider);
     }

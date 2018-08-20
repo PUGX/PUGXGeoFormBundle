@@ -2,6 +2,9 @@
 
 namespace PUGX\GeoFormBundle\Tests\EventListener;
 
+use Geocoder\Location;
+use Geocoder\Model\Coordinates;
+use PUGX\GeoFormBundle\Adapter\GeoDataAdapterInterface;
 use PUGX\GeoFormBundle\EventListener\GeoTypeForm;
 
 class GeoTypeFormTest extends \PHPUnit\Framework\TestCase
@@ -17,9 +20,9 @@ class GeoTypeFormTest extends \PHPUnit\Framework\TestCase
     {
         $this->formEvent = $this->getMockBuilder('Symfony\Component\Form\FormEvent')->disableOriginalConstructor()->getMock();
         $this->form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $this->dataAdapter = $this->getMockBuilder('PUGX\GeoFormBundle\Adapter\GeoDataAdapterInterface')->getMock();
+        $this->dataAdapter = $this->createMock(GeoDataAdapterInterface::class);
         $this->manager = $this->getMockBuilder('PUGX\GeoFormBundle\Manager\GeoCodeManager')->disableOriginalConstructor()->getMock();
-        $this->location = $this->getMockBuilder('Geocoder\Result\ResultInterface')->disableOriginalConstructor()->getMock();
+        $this->location = $this->createMock(Location::class);
         $this->listener = new GeoTypeForm($this->manager, $this->dataAdapter, ['lat' => 'latitude', 'lng' => 'longitude']);
     }
 
@@ -57,19 +60,14 @@ class GeoTypeFormTest extends \PHPUnit\Framework\TestCase
             ->will($this->returnValue($this->location));
 
         $this->location
-            ->expects($this->once())
-            ->method('getLatitude')
-            ->will($this->returnValue(123));
-
-        $this->location
-            ->expects($this->once())
-            ->method('getLongitude')
-            ->will($this->returnValue(456));
+            ->expects($this->any())
+            ->method('getCoordinates')
+            ->will($this->returnValue(new Coordinates(41, 12)));
 
         $this->formEvent
             ->expects($this->once())
             ->method('setData')
-            ->with(['address' => $address, 'latitude' => 123, 'longitude' => 456]);
+            ->with(['address' => $address, 'latitude' => 41, 'longitude' => 12]);
 
         $this->listener->onFormPreSubmit($this->formEvent);
     }

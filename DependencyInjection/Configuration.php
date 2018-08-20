@@ -5,17 +5,9 @@ namespace PUGX\GeoFormBundle\DependencyInjection;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-/**
- * PUGXGeoFormBundle configuration structure.
- */
 class Configuration implements ConfigurationInterface
 {
-    /**
-     * Generates the configuration tree.
-     *
-     * @return TreeBuilder
-     */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('pugx_geo_form');

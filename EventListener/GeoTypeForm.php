@@ -2,6 +2,7 @@
 
 namespace PUGX\GeoFormBundle\EventListener;
 
+use Geocoder\Exception\Exception;
 use PUGX\GeoFormBundle\Adapter\GeoDataAdapterInterface;
 use PUGX\GeoFormBundle\Manager\GeoCodeManager;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -35,7 +36,7 @@ class GeoTypeForm implements EventSubscriberInterface
         $this->geoCode = $geoCode;
         $this->dataAdapter = $dataAdapter;
         $this->names = $names;
-        if (!isset($names['lat']) || !isset($names['lng'])) {
+        if (!isset($names['lat'], $names['lng'])) {
             throw new \InvalidArgumentException('Names array must be formed with lat/lng keys.');
         }
     }
@@ -64,11 +65,12 @@ class GeoTypeForm implements EventSubscriberInterface
 
             $this->geoCode->query($address);
             $location = $this->geoCode->getFirst();
-            $data[$this->names['lat']] = $location->getLatitude();
-            $data[$this->names['lng']] = $location->getLongitude();
-
-            $event->setData($data);
-        } catch (\Exception $e) {
+            if (null !== $location && (null !== $coordinates = $location->getCoordinates())) {
+                $data[$this->names['lat']] = $coordinates->getLatitude();
+                $data[$this->names['lng']] = $coordinates->getLongitude();
+                $event->setData($data);
+            }
+        } catch (Exception $e) {
             //silently fail
         }
     }
