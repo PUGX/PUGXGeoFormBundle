@@ -13,9 +13,13 @@ services:
         class: "%pugx_geo_form.http_client_class%"
         public: false
 
+    pugx_geo_form.message_factory:
+        class: Http\Message\MessageFactory\GuzzleMessageFactory
+        public: false
+
     pugx_geo_form.geo_http_adapter:
         class: "%pugx_geo_form.geo_http_adapter_class%"
-        arguments: ["@pugx_geo_form.http_client"]
+        arguments: ["@pugx_geo_form.http_client", "@pugx_geo_form.message_factory"]
         public: false
 
     pugx_geo_form.geo_provider:
