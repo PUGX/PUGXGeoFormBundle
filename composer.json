@@ -22,8 +22,6 @@
     "require": {
         "php": "^7.0",
         "geocoder-php/google-maps-provider": "^4.2",
-        "kriswallsmith/buzz": "^0.15|^0.16|^0.17",
-        "php-http/buzz-adapter": "^1.0",
         "php-http/message": "^1.7",
         "symfony/form": "^2.8|^3.4|^4.0",
         "symfony/framework-bundle": "^2.8|^3.4|^4.0",
@@ -31,10 +29,14 @@
         "willdurand/geocoder": "^4.2"
     },
     "require-dev": {
+        "php-http/guzzle6-adapter": "^1.1",
         "phpunit/phpunit": "^6.0|^7.0",
         "symfony/phpunit-bridge": "^4.1",
-        "symfony/validator": "^2.7|^3.4|^4.0",
-        "symfony/yaml": "^2.7|^3.4|^4.0"
+        "symfony/validator": "^2.8|^3.4|^4.0",
+        "symfony/yaml": "^2.8|^3.4|^4.0"
+    },
+    "suggests": {
+        "php-http/guzzle6-adapter": "To use Guzzle"
     },
     "autoload": {
         "psr-4": { "PUGX\\GeoFormBundle\\": "" }

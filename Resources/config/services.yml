@@ -1,56 +1,37 @@
-parameters:
-    pugx_geo_form.geo_data_adapter_class: PUGX\GeoFormBundle\Adapter\GeoDataAdapter
-    pugx_geo_form.geo_provider_class: Geocoder\Provider\GoogleMaps\GoogleMaps
-    pugx_geo_form.geo_http_adapter_class: Http\Adapter\Buzz\Client
-    pugx_geo_form.http_client_class: Buzz\Client\Curl
-    pugx_geo_form.geocoder_class: Geocoder\ProviderAggregator
-    pugx_geo_form.geo_code_manager_class: PUGX\GeoFormBundle\Manager\GeoCodeManager
-    pugx_geo_form.geo_form_type_subscriber_class: PUGX\GeoFormBundle\EventListener\GeoTypeForm
-    pugx_geo_form.geo_code_type_extension_class: PUGX\GeoFormBundle\Form\Extension\GeoCodeExtension
-
 services:
-    pugx_geo_form.http_client:
-        class: "%pugx_geo_form.http_client_class%"
-        public: false
-
-    pugx_geo_form.message_factory:
-        class: Http\Message\MessageFactory\GuzzleMessageFactory
-        public: false
-
     pugx_geo_form.geo_http_adapter:
         class: "%pugx_geo_form.geo_http_adapter_class%"
-        arguments: ["@pugx_geo_form.http_client", "@pugx_geo_form.message_factory"]
         public: false
 
     pugx_geo_form.geo_provider:
-        class: "%pugx_geo_form.geo_provider_class%"
+        class: Geocoder\Provider\GoogleMaps\GoogleMaps
         arguments: ["@pugx_geo_form.geo_http_adapter", "%kernel.default_locale%", "%pugx_geo_form.region%", "%pugx_geo_form.useSsl%"]
         public: false
 
     pugx_geo_form.geocoder:
-        class: "%pugx_geo_form.geocoder_class%"
+        class: Geocoder\ProviderAggregator
         public: false
 
     pugx_geo_form.geo_code_manager:
-        class: "%pugx_geo_form.geo_code_manager_class%"
+        class: PUGX\GeoFormBundle\Manager\GeoCodeManager
         arguments: ["@pugx_geo_form.geocoder"]
         public: true
         calls:
             - [registerProvider, ["@pugx_geo_form.geo_provider"]]
 
     pugx_geo_form.geo_data_adapter:
-        class: "%pugx_geo_form.geo_data_adapter_class%"
+        class: PUGX\GeoFormBundle\Adapter\GeoDataAdapter
         public: false
 
     pugx_geo_form.geo_form_type_subscriber:
-        class: "%pugx_geo_form.geo_form_type_subscriber_class%"
+        class: PUGX\GeoFormBundle\EventListener\GeoTypeForm
         arguments: ["@pugx_geo_form.geo_code_manager", "@pugx_geo_form.geo_data_adapter", "%pugx_geo_form.names%"]
         public: true
         tags:
             - { name: kernel.event_subscriber }
 
     pugx_geo_form.geo_code_type_extension:
-        class: "%pugx_geo_form.geo_code_type_extension_class%"
+        class: PUGX\GeoFormBundle\Form\Extension\GeoCodeExtension
         arguments: ["@pugx_geo_form.geo_form_type_subscriber"]
         public: true
         tags:

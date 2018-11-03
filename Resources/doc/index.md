@@ -20,30 +20,35 @@ PUGXGeoFormBundle uses [willdurand/geocoder](https://packagist.org/packages/will
 Run
 
 ``` bash
-$ composer require pugx/geo-form-bundle
+$ composer require php-http/guzzle6-adapter pugx/geo-form-bundle
 ```
+
+You can require a different HTTP client from Guzzle. Any PSR-7 compatible client should be OK.
 
 ### 2. Enable the bundle
 
-Enable the bundle in the kernel:
+If you don't use Flex, you need to enable the bundle in the kernel:
 
 ``` php
 <?php
-// app/AppKernel.php
+// e.g. app/AppKernel.php
 
 public function registerBundles()
 {
-    $bundles = array(
+    $bundles = [
         // ...
         new PUGX\GeoFormBundle\PUGXGeoFormBundle(),
-    );
+    ];
 }
 ```
 
 ### 3. config.yml
 
-Add a `pugx_geo_form` entry in your config.yml, specifying if ssl should be used and the region (note: this is just a bias, not a geographic constraint - see for example [google maps api docs](https://developers.google.com/maps/documentation/geocoding/?hl=it-IT&csw=1#RegionCodes))
+Add a `pugx_geo_form` entry in your config.yml, specifying if ssl should be used and the region
+(note: this is just a bias, not a geographic constraint - see for example
+[google maps api docs](https://developers.google.com/maps/documentation/geocoding/?hl=it-IT&csw=1#RegionCodes))
 You can also customize the names for "latitude" and "longitude", or omit that options and get default ones.
+If you installed an HTTP client different from Guzzle, you can specify it in the last two options.
 
 ``` yml
 pugx_geo_form:
@@ -53,7 +58,17 @@ pugx_geo_form:
     names:
         lat: latitude
         lng: longitude
+    http_adapter: Http\Adapter\Guzzle6\Client
 ```
+
+Example of configuration with Buzz instead of Guzzle:
+
+``` yml
+pugx_geo_form:
+    # [...]
+    http_adapter: Http\Adapter\Buzz\Client
+```
+
 
 ### 3. Form
 
@@ -68,7 +83,7 @@ Here's an example:
 ``` php
 <?php
 
-namespace AppBundle\Form\Type;
+namespace App\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type;
@@ -78,16 +93,16 @@ class SearchFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('address', Type\TextType::class, array('required' => true, 'geo_code_field' => true));
-        $builder->add('longitude', Type\HiddenType::class, array('required' => false));
-        $builder->add('latitude', Type\HiddenType::class, array('required' => false));
+        $builder->add('address', Type\TextType::class, ['required' => true, 'geo_code_field' => true]);
+        $builder->add('longitude', Type\HiddenType::class, ['required' => false]);
+        $builder->add('latitude', Type\HiddenType::class, ['required' => false]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'geo_code' => true,
-        ));
+        ]);
     }
 }
 ```
@@ -101,7 +116,7 @@ you can specify the `geo_code_field` option for more than one field:
 ``` php
 <?php
 
-namespace AppBundle\Form\Type;
+namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type;
@@ -111,24 +126,24 @@ class SearchFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('address', TypeTextType::class, array('required' => true, 'geo_code_field' => true));
-        $builder->add('city', TypeTextType::class, array('required' => true, 'geo_code_field' => true));
-        $builder->add('country', TypeTextType::class, array('required' => true, 'geo_code_field' => true));
-        $builder->add('longitude', TypeHiddenType::class, array('required' => false));
-        $builder->add('latitude', TypeHiddenType::class, array('required' => false));
+        $builder->add('address', TypeTextType::class, ['required' => true, 'geo_code_field' => true]);
+        $builder->add('city', TypeTextType::class, ['required' => true, 'geo_code_field' => true]);
+        $builder->add('country', TypeTextType::class, ['required' => true, 'geo_code_field' => true]);
+        $builder->add('longitude', TypeHiddenType::class, ['required' => false]);
+        $builder->add('latitude', TypeHiddenType::class, ['required' => false]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'geo_code' => true,
-        ));
+        ]);
     }
 }
 
 ```
 
-In addition, a little javascript snippet is included in the bundle for integrating Google Places Autocomplete.
+In addition, a little Javascript snippet is included in the bundle for integrating Google Places Autocomplete.
 In order to use it, you have to add some classes to you form fields:
 
 ``` php
@@ -144,39 +159,38 @@ class SearchFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('address', TypeTextType::class, array(
+        $builder->add('address', TypeTextType::class, [
             'required' => true,
-            'attr' => array(
+            'attr' => [
                 'class' => 'pugx-geocode'
             )
-        ));
-        $builder->add('longitude', TypeHiddenType::class, array(
+        ]);
+        $builder->add('longitude', TypeHiddenType::class, [
             'required' => false,
-            'attr' => array(
+            'attr' => [
                 'class' => 'pugx-geocode-longitude'
             )
-        ));
-
-        $builder->add('latitude', TypeHiddenType::class, array(
+        ]);
+        $builder->add('latitude', TypeHiddenType::class, [
             'required' => false,
-            'attr' => array(
+            'attr' => [
                 'class' => 'pugx-geocode-latitude'
             )
-        ));
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'geo_code' => true,
-        ));
+        ]);
     }
 }
 
 ```
 
-As you can see, `pugx-geocode` is used for the meaningful geocoding field (the address), while `pugx-geocode-latitude` and
-`pugx-geocode-longitude` are used for easily identifying latitude and longitude fields.
+As you can see, `pugx-geocode` is used for the meaningful geocoding field (the address), while `pugx-geocode-latitude`
+and `pugx-geocode-longitude` are used for easily identifying latitude and longitude fields.
 
 Once you have the classes in place, you can include the snippet in your twig (jQuery is required):
 

@@ -13,6 +13,9 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('pugx_geo_form');
         $rootNode
             ->children()
+                ->scalarNode('http_adapter')
+                    ->defaultValue('Http\Adapter\Guzzle6\Client')
+                ->end()
                 ->scalarNode('region')
                     ->validate()
                     ->ifNull()
