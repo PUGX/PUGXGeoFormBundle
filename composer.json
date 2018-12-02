@@ -20,20 +20,20 @@
         }
     ],
     "require": {
-        "php": "^7.0",
+        "php": "^7.1",
         "geocoder-php/google-maps-provider": "^4.2",
         "php-http/message": "^1.7",
-        "symfony/form": "^2.8|^3.4|^4.0",
-        "symfony/framework-bundle": "^2.8|^3.4|^4.0",
-        "symfony/security-bundle": "^2.8|^3.4|^4.0",
+        "symfony/form": "^3.4|^4.1",
+        "symfony/framework-bundle": "^3.4|^4.1",
+        "symfony/security-bundle": "^3.4|^4.1",
         "willdurand/geocoder": "^4.2"
     },
     "require-dev": {
         "php-http/guzzle6-adapter": "^1.1",
-        "phpunit/phpunit": "^6.0|^7.0",
+        "phpunit/phpunit": "^7.0",
         "symfony/phpunit-bridge": "^4.1",
-        "symfony/validator": "^2.8|^3.4|^4.0",
-        "symfony/yaml": "^2.8|^3.4|^4.0"
+        "symfony/validator": "^3.4|^4.1",
+        "symfony/yaml": "^3.4|^4.1"
     },
     "suggests": {
         "php-http/guzzle6-adapter": "To use Guzzle"
@@ -43,7 +43,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.5.0-dev"
+            "dev-master": "0.6.0-dev"
         }
     }
 }
