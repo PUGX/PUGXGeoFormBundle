@@ -6,14 +6,6 @@ use Symfony\Component\Form\FormInterface;
 
 class GeoDataAdapter implements GeoDataAdapterInterface
 {
-    /**
-     * @param mixed         $data
-     * @param FormInterface $form
-     *
-     * @return string
-     *
-     * @throws \InvalidArgumentException
-     */
     public function getFullAddress($data, FormInterface $form): string
     {
         $fields = [];
@@ -25,7 +17,7 @@ class GeoDataAdapter implements GeoDataAdapterInterface
         }
 
         if (\count($fields) > 0) {
-            return implode(' ', $fields);
+            return \implode(' ', $fields);
         }
 
         throw new \InvalidArgumentException('GeoDataAdapter address field mismatch');

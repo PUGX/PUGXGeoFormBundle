@@ -4,9 +4,9 @@ namespace PUGX\GeoFormBundle\Form\Extension;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class GeoCodeExtension extends AbstractTypeExtension
 {
@@ -17,17 +17,12 @@ class GeoCodeExtension extends AbstractTypeExtension
         $this->listener = $listener;
     }
 
-    public function getExtendedType()
+    public function getExtendedType(): string
     {
-        // BC with Symfony <2.8
-        if (!method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
-            return 'form';
-        }
-
-        return 'Symfony\Component\Form\Extension\Core\Type\FormType';
+        return FormType::class;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if (!isset($options['geo_code']) || !$options['geo_code']) {
             return;
@@ -36,20 +31,7 @@ class GeoCodeExtension extends AbstractTypeExtension
         $builder->addEventSubscriber($this->listener);
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * Symfony <2.7 BC. To be removed when bumping requirements to SF 2.7+
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $this->configureOptions($resolver);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'geo_code' => false,

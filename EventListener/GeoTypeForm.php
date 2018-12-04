@@ -26,11 +26,6 @@ class GeoTypeForm implements EventSubscriberInterface
      */
     private $names;
 
-    /**
-     * @param GeoCodeManager          $geoCode
-     * @param GeoDataAdapterInterface $dataAdapter
-     * @param array                   $names
-     */
     public function __construct(GeoCodeManager $geoCode, GeoDataAdapterInterface $dataAdapter, array $names)
     {
         $this->geoCode = $geoCode;
@@ -41,10 +36,7 @@ class GeoTypeForm implements EventSubscriberInterface
         }
     }
 
-    /**
-     * @return array
-     */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             FormEvents::PRE_SUBMIT => 'onFormPreSubmit',
@@ -54,9 +46,9 @@ class GeoTypeForm implements EventSubscriberInterface
     /**
      * set coordinates if null.
      *
-     * @param \Symfony\Component\Form\FormEvent $event
+     * @param FormEvent $event
      */
-    public function onFormPreSubmit(FormEvent $event)
+    public function onFormPreSubmit(FormEvent $event): void
     {
         $data = $event->getData();
         $form = $event->getForm();

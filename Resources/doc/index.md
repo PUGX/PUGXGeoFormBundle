@@ -3,7 +3,7 @@ PUGXGeoFormBundle Documentation
 
 ## Prerequisites
 
-This version of the bundle requires Symfony >= 2.3
+This version of the bundle requires Symfony >= 3.4
 
 PUGXGeoFormBundle uses [willdurand/geocoder](https://packagist.org/packages/willdurand/geocoder) as a backend geocoding service.
 
@@ -22,6 +22,10 @@ Run
 ``` bash
 $ composer require php-http/guzzle6-adapter pugx/geo-form-bundle
 ```
+
+>⚠️ for now, you need to require `php-http/guzzle6-adapter:^1.0`.
+> Version `^2.0` will be usable only after a new stable release
+> from https://github.com/geocoder-php/php-common-http
 
 You can require a different HTTP client from Guzzle. Any PSR-7 compatible client should be OK.
 

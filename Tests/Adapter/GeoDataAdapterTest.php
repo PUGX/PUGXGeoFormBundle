@@ -6,11 +6,10 @@ use PUGX\GeoFormBundle\Adapter\GeoDataAdapter;
 
 class GeoDataAdapterTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testGetFullAddressThrowException()
+    public function testGetFullAddressThrowException(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
         $form
             ->expects($this->once())
@@ -21,7 +20,7 @@ class GeoDataAdapterTest extends \PHPUnit\Framework\TestCase
         $adapter->getFullAddress([], $form);
     }
 
-    public function testGetFullAddressReturnValues()
+    public function testGetFullAddressReturnValues(): void
     {
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
         $field = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();

@@ -16,7 +16,7 @@ class GeoTypeFormTest extends \PHPUnit\Framework\TestCase
     protected $listener;
     protected $location;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->formEvent = $this->getMockBuilder('Symfony\Component\Form\FormEvent')->disableOriginalConstructor()->getMock();
         $this->form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
@@ -26,7 +26,7 @@ class GeoTypeFormTest extends \PHPUnit\Framework\TestCase
         $this->listener = new GeoTypeForm($this->manager, $this->dataAdapter, ['lat' => 'latitude', 'lng' => 'longitude']);
     }
 
-    public function testOnFormPreSubmit()
+    public function testOnFormPreSubmit(): void
     {
         $address = 'Via XYZ 22';
         $data = [

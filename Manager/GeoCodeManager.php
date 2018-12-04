@@ -41,7 +41,7 @@ class GeoCodeManager
      *
      * @throws \Geocoder\Exception\Exception
      */
-    public function query(string $query)
+    public function query(string $query): void
     {
         if (0 === \count($this->geoCoder->getProviders())) {
             throw new \RuntimeException('Service is not set');
@@ -56,7 +56,7 @@ class GeoCodeManager
      *
      * @return Location|null
      */
-    public function getResult(int $index)
+    public function getResult(int $index): ?Location
     {
         if (isset($this->results[$index])) {
             return $this->results[$index];
@@ -70,12 +70,12 @@ class GeoCodeManager
      *
      * @return Location|null
      */
-    public function getFirst()
+    public function getFirst(): ?Location
     {
         return $this->getResult(0);
     }
 
-    public function registerProvider(Provider $provider)
+    public function registerProvider(Provider $provider): void
     {
         $this->geoCoder->registerProvider($provider);
     }

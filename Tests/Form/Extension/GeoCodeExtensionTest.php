@@ -15,7 +15,7 @@ class GeoCodeExtensionTest extends \PHPUnit\Framework\TestCase
     protected $extension;
     protected $formBuilder;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->resolver = $this->getMockbuilder('Symfony\Component\OptionsResolver\OptionsResolver')->disableOriginalConstructor()->getMock();
         $this->listener = $this->getMockbuilder('Symfony\Component\EventDispatcher\EventSubscriberInterface')->getMock();
@@ -26,7 +26,7 @@ class GeoCodeExtensionTest extends \PHPUnit\Framework\TestCase
     /**
      * @group legacy
      */
-    public function testSetDefaultOptions()
+    public function testSetDefaultOptions(): void
     {
         $this->resolver
             ->expects($this->once())
@@ -39,7 +39,7 @@ class GeoCodeExtensionTest extends \PHPUnit\Framework\TestCase
         $this->extension->configureOptions($this->resolver);
     }
 
-    public function testConfigureOptions()
+    public function testConfigureOptions(): void
     {
         $this->resolver
             ->expects($this->once())
@@ -52,7 +52,7 @@ class GeoCodeExtensionTest extends \PHPUnit\Framework\TestCase
         $this->extension->configureOptions($this->resolver);
     }
 
-    public function testBuildFormWithGeoCode()
+    public function testBuildFormWithGeoCode(): void
     {
         $this->formBuilder
             ->expects($this->once())
@@ -62,7 +62,7 @@ class GeoCodeExtensionTest extends \PHPUnit\Framework\TestCase
         $this->extension->buildForm($this->formBuilder, ['geo_code' => true]);
     }
 
-    public function testBuildFormWithoutGeoCode()
+    public function testBuildFormWithoutGeoCode(): void
     {
         $this->formBuilder
             ->expects($this->never())

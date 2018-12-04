@@ -16,7 +16,7 @@ class GeoCodeManagerTest extends \PHPUnit\Framework\TestCase
     private $collection;
     private $result;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->provider = $this->createMock(Provider::class);
         $this->geoCoder = $this->createMock(ProviderAggregator::class);
@@ -25,7 +25,7 @@ class GeoCodeManagerTest extends \PHPUnit\Framework\TestCase
         $this->manager = new GeoCodeManager($this->geoCoder);
     }
 
-    public function testRegisterProvider()
+    public function testRegisterProvider(): void
     {
         $this->geoCoder
             ->expects($this->once())
@@ -35,7 +35,7 @@ class GeoCodeManagerTest extends \PHPUnit\Framework\TestCase
         $this->manager->registerProvider($this->provider);
     }
 
-    public function testQuery()
+    public function testQuery(): void
     {
         $this->geoCoder
             ->expects($this->once())
