@@ -48,7 +48,7 @@ public function registerBundles()
 
 ### 3. config.yml
 
-Add a `pugx_geo_form` entry in your config.yml, specifying if ssl should be used and the region
+Add a `pugx_geo_form` entry in your config.yml, specifying your regione
 (note: this is just a bias, not a geographic constraint - see for example
 [google maps api docs](https://developers.google.com/maps/documentation/geocoding/?hl=it-IT&csw=1#RegionCodes))
 You can also customize the names for "latitude" and "longitude", or omit that options and get default ones.
@@ -57,7 +57,6 @@ If you installed an HTTP client different from Guzzle, you can specify it in the
 ``` yml
 pugx_geo_form:
     region: IT
-    useSsl: false
     # the following options are not mandatory (here are shown with their default value)
     names:
         lat: latitude
